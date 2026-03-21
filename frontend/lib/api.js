@@ -1,36 +1,23 @@
-const HF_API_KEY = process.env.NEXT_PUBLIC_HF_API_KEY || ("hf_" + "RVmrWGhHnFCqAl" + "xsqLYErHKgcRr" + "WQydihF");
-const HF_MODEL_ID = process.env.NEXT_PUBLIC_HF_MODEL_ID || "FGArmy/Parking_AI";
+import axios from 'axios';
 
-// Upload media (YOLO detection via Hugging Face Inference API)
+// Upload media (YOLO detection via internal Next.js API proxy to avoid CORS)
 export const uploadMedia = async (file) => {
-  if (!HF_API_KEY) {
-
-    throw new Error("Missing Hugging Face Token in environment variables. Please check your Vercel settings.");
-  }
-
   try {
-    const response = await fetch(
-      `https://api-inference.huggingface.co/models/${HF_MODEL_ID}`,
-      {
-        headers: { Authorization: `Bearer ${HF_API_KEY}` },
-        method: "POST",
-        body: file,
-      }
-    );
+    const formData = new FormData();
+    formData.append('media', file);
+
+    const response = await fetch('/api/detect', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
 
     if (!response.ok) {
-      const errorData = await response.text();
-      let errMsg = response.statusText;
-      try {
-        const jsonE = JSON.parse(errorData);
-        errMsg = jsonE.error || errMsg;
-      } catch(e) {
-        // ignore JSON parse error
-      }
-      throw new Error(`Hugging Face API Error: ${errMsg}`);
+      throw new Error(data.error || 'Error from server');
     }
 
-    const result = await response.json();
+    const result = data.result;
     
     // Process results into format expected by page.js
     let empty = 0;

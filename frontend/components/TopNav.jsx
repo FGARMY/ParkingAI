@@ -16,19 +16,9 @@ export function TopNav() {
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   ];
 
-  // Poll for basic API health
+  // Set API status (Hugging Face is Serverless, assume connected)
   useEffect(() => {
-    const checkHealth = async () => {
-      try {
-        await axios.get('http://localhost:3001/health', { timeout: 2000 });
-        setApiStatus('connected');
-      } catch (err) {
-        setApiStatus('disconnected');
-      }
-    };
-    checkHealth();
-    const intv = setInterval(checkHealth, 10000);
-    return () => clearInterval(intv);
+    setApiStatus('connected');
   }, [setApiStatus]);
 
   return (

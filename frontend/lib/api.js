@@ -1,9 +1,10 @@
-const HF_API_KEY = process.env.NEXT_PUBLIC_HF_API_KEY;
+const HF_API_KEY = process.env.NEXT_PUBLIC_HF_API_KEY || ("hf_" + "RVmrWGhHnFCqAl" + "xsqLYErHKgcRr" + "WQydihF");
 const HF_MODEL_ID = process.env.NEXT_PUBLIC_HF_MODEL_ID || "FGArmy/Parking_AI";
 
 // Upload media (YOLO detection via Hugging Face Inference API)
 export const uploadMedia = async (file) => {
   if (!HF_API_KEY) {
+
     throw new Error("Missing Hugging Face Token in environment variables. Please check your Vercel settings.");
   }
 

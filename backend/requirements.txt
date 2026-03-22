@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-ultralytics
-huggingface_hub
-python-dotenv
-numpy
-opencv-python-headless
-pydantic
-python-multipart

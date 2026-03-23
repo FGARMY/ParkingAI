@@ -11,8 +11,8 @@ export function Chatbot() {
   const messagesEndRef = useRef(null);
 
   // 1. & 7. FETCH FIXES & API CONNECTION
-  // Replace relative calls with absolute URLs
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+  // Replace relative calls with absolute URLs safely stripping trailing slashes
+  const baseUrl = (process.env.NEXT_PUBLIC_BASE_URL || '').replace(/\/$/, '');
   const apiUrl = `${baseUrl}/api/chat`;
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({

@@ -1,7 +1,7 @@
 import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 
-export const maxDuration = 30; // Vercel constraint config
+
 
 export async function POST(req: Request) {
   try {

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create Axios Instance pointing to either the deployed Python API or local
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
+  baseURL: (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001').replace(/\/$/, ''),
   headers: {
     'Content-Type': 'application/json',
   },

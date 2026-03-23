@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import Providers from './providers'
 import { TopNav } from '@/components/TopNav'
+import { Chatbot } from '@/components/Chatbot'
 import "./globals.css"
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
             <main className="flex-1">
               {children}
             </main>
+            <Chatbot />
           </div>
         </Providers>
       </body>

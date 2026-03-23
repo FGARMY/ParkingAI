@@ -9,7 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.52",
+    "@ai-sdk/react": "^3.0.136",
     "@tanstack/react-query": "^5.91.3",
+    "ai": "^6.0.134",
     "axios": "^1.13.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
